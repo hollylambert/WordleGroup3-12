@@ -22,14 +22,15 @@ def wordle():
         random_word = FIVE_LETTER_WORDS[index]
 
         # Displays the random word after first guess is made
+
         random_word_letters = []
         for letter in random_word:
             random_word_letters.append(letter)
-        gw.set_square_letter(1, 0, random_word_letters[0])
-        gw.set_square_letter(1, 1, random_word_letters[1])
-        gw.set_square_letter(1, 2, random_word_letters[2])
-        gw.set_square_letter(1, 3, random_word_letters[3])
-        gw.set_square_letter(1, 4, random_word_letters[4])
+        gw.set_square_letter(0, 0, random_word_letters[0])
+        gw.set_square_letter(0, 1, random_word_letters[1])
+        gw.set_square_letter(0, 2, random_word_letters[2])
+        gw.set_square_letter(0, 3, random_word_letters[3])
+        gw.set_square_letter(0, 4, random_word_letters[4])
 
         # gw.show_message("You have to implement this method.")
 
