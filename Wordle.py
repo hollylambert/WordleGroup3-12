@@ -43,6 +43,7 @@ def wordle():
     def enter_action(s):
         # Allow user to continue guessing for all 6 guesses
         global N_ROWS
+
         entered_word = s.lower()
 
         if entered_word in FIVE_LETTER_WORDS:
@@ -58,7 +59,7 @@ def wordle():
     gw = WordleGWindow()
 
     while N_ROWS > 0:
-        gw.add_enter_listener(enter_action)
+        gw.add_enter_listener(enter_action())
 
         """
         # Displays the random word after first guess is made for MILESTONE 1
