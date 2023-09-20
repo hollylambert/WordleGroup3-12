@@ -12,7 +12,7 @@ from WordleGraphics import (
     MISSING_COLOR,
 )
 
-"""
+
 # Process through each letter in the guess and determine it's color
 def processGuess(random_word, entered_word, gw):
     position = 0
@@ -30,7 +30,6 @@ def processGuess(random_word, entered_word, gw):
         position += 1
     # print(cell)
     return cell
-"""
 
 
 def wordle():
@@ -59,7 +58,7 @@ def wordle():
     gw = WordleGWindow()
 
     while N_ROWS > 0:
-        gw.add_enter_listener(enter_action())
+        gw.add_enter_listener(enter_action(s))
 
         """
         # Displays the random word after first guess is made for MILESTONE 1
