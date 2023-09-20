@@ -12,7 +12,7 @@ from WordleGraphics import (
     MISSING_COLOR,
 )
 
-
+"""
 # Process through each letter in the guess and determine it's color
 def processGuess(random_word, entered_word, gw):
     position = 0
@@ -30,6 +30,7 @@ def processGuess(random_word, entered_word, gw):
         position += 1
     # print(cell)
     return cell
+"""
 
 
 def wordle():
@@ -39,39 +40,43 @@ def wordle():
     # randomly selects a letter from FIVE_LETTER_WORDS using the randomly selected index
     random_word = FIVE_LETTER_WORDS[index]
 
-    def enter_action(s):
-        N_ROWS = 6
+    def enter_action(s, N_ROWS, gw):
         # Allow user to continue guessing for all 6 guesses
-        while N_ROWS > 0:
-            entered_word = s.lower()
 
-            if entered_word in FIVE_LETTER_WORDS:
-                gw.show_message("That word is valid!")
-            else:
-                gw.show_message("Not in word list")
+        entered_word = s.lower()
 
-            processGuess(random_word, entered_word, gw)
+        if entered_word in FIVE_LETTER_WORDS:
+            gw.show_message("That word is valid!")
+        else:
+            gw.show_message("Not in word list")
 
-            # iterate to the next row
-            N_ROWS = N_ROWS - 1
+        # processGuess(random_word, entered_word, gw)
 
-            """
-            # Displays the random word after first guess is made for MILESTONE 1
+        # iterate to the next row
+        N_ROWS -= 1
 
-            random_word_letters = []
-            for letter in random_word:
-                random_word_letters.append(letter)
-            gw.set_square_letter(0, 0, random_word_letters[0])
-            gw.set_square_letter(0, 1, random_word_letters[1])
-            gw.set_square_letter(0, 2, random_word_letters[2])
-            gw.set_square_letter(0, 3, random_word_letters[3])
-            gw.set_square_letter(0, 4, random_word_letters[4])
-
-            # gw.show_message("You have to implement this method.")
-            """
-
+    N_ROWS = 6
     gw = WordleGWindow()
-    gw.add_enter_listener(enter_action)
+
+    while N_ROWS > 0:
+        gw.add_enter_listener(
+            lambda s, N_ROWS=N_ROWS, gw=gw: enter_action(s, N_ROWS, gw)
+        )
+
+        """
+        # Displays the random word after first guess is made for MILESTONE 1
+
+        random_word_letters = []
+        for letter in random_word:
+            random_word_letters.append(letter)
+        gw.set_square_letter(0, 0, random_word_letters[0])
+        gw.set_square_letter(0, 1, random_word_letters[1])
+        gw.set_square_letter(0, 2, random_word_letters[2])
+        gw.set_square_letter(0, 3, random_word_letters[3])
+        gw.set_square_letter(0, 4, random_word_letters[4])
+
+        # gw.show_message("You have to implement this method.")
+        """
 
 
 # Startup code
