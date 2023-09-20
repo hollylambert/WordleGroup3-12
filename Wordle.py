@@ -40,9 +40,9 @@ def wordle():
     # randomly selects a letter from FIVE_LETTER_WORDS using the randomly selected index
     random_word = FIVE_LETTER_WORDS[index]
 
-    def enter_action(s, N_ROWS, gw):
+    def enter_action(s):
         # Allow user to continue guessing for all 6 guesses
-
+        global N_ROWS
         entered_word = s.lower()
 
         if entered_word in FIVE_LETTER_WORDS:
@@ -55,13 +55,10 @@ def wordle():
         # iterate to the next row
         N_ROWS -= 1
 
-    N_ROWS = 6
     gw = WordleGWindow()
 
     while N_ROWS > 0:
-        gw.add_enter_listener(
-            lambda s, N_ROWS=N_ROWS, gw=gw: enter_action(s, N_ROWS, gw)
-        )
+        gw.add_enter_listener(enter_action)
 
         """
         # Displays the random word after first guess is made for MILESTONE 1
@@ -76,8 +73,11 @@ def wordle():
         gw.set_square_letter(0, 4, random_word_letters[4])
 
         # gw.show_message("You have to implement this method.")
+
         """
 
+
+# this was included right before enter_action in the while loop: lambda s, N_ROWS=N_ROWS, gw=gw: -I'm trying to see if this is the issue
 
 # Startup code
 if __name__ == "__main__":
