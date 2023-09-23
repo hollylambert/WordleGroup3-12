@@ -2,7 +2,7 @@
 Starter file
 """
 import random
-from WordleDictionary import FIVE_LETTER_WORDS
+from WordleDictionary import FIVE_LETTER_WORDS, FRENCH_FIVE_LETTER_WORDS, SPANISH_FIVE_LETTER_WORDS
 from WordleGraphics import (
     WordleGWindow,
     N_ROWS,
@@ -32,7 +32,7 @@ def processGuess(random_word, entered_word, gw):
     return cell
 
 
-def wordle():
+def en_wordle():
     # Generates a random index to choose a word from the FIVE_LETTER_WORDS array
     index = random.randint(0, len(FIVE_LETTER_WORDS) - 1)
 
@@ -81,4 +81,107 @@ def wordle():
 
 # Startup code
 if __name__ == "__main__":
-    wordle()
+    en_wordle()
+
+def fr_wordle():
+    # Generates a random index to choose a word from the FIVE_LETTER_WORDS array
+    index = random.randint(0, len(FRENCH_FIVE_LETTER_WORDS) - 1)
+
+    # randomly selects a letter from FIVE_LETTER_WORDS using the randomly selected index
+    random_word = FRENCH_FIVE_LETTER_WORDS[index]
+
+    def enter_action(s):
+        # Allow user to continue guessing for all 6 guesses
+        global N_ROWS
+
+        entered_word = s.lower()
+
+        if entered_word in FRENCH_FIVE_LETTER_WORDS:
+            gw.show_message("Ce mot est valable!")
+        else:
+            gw.show_message("Pas dans la liste de mots.")
+
+        # processGuess(random_word, entered_word, gw)
+
+        # iterate to the next row
+        N_ROWS -= 1
+
+    gw = WordleGWindow()
+
+    while N_ROWS > 0:
+        gw.add_enter_listener(enter_action(s))
+
+        """
+        # Displays the random word after first guess is made for MILESTONE 1
+
+        random_word_letters = []
+        for letter in random_word:
+            random_word_letters.append(letter)
+        gw.set_square_letter(0, 0, random_word_letters[0])
+        gw.set_square_letter(0, 1, random_word_letters[1])
+        gw.set_square_letter(0, 2, random_word_letters[2])
+        gw.set_square_letter(0, 3, random_word_letters[3])
+        gw.set_square_letter(0, 4, random_word_letters[4])
+
+        # gw.show_message("You have to implement this method.")
+
+        """
+
+
+# this was included right before enter_action in the while loop: lambda s, N_ROWS=N_ROWS, gw=gw: -I'm trying to see if this is the issue
+
+# Startup code
+if __name__ == "__main__":
+    fr_wordle()
+
+def sp_wordle():
+    # Generates a random index to choose a word from the FIVE_LETTER_WORDS array
+    index = random.randint(0, len(SPANISH_FIVE_LETTER_WORDS) - 1)
+
+    # randomly selects a letter from FIVE_LETTER_WORDS using the randomly selected index
+    random_word = SPANISH_FIVE_LETTER_WORDS[index]
+
+    def enter_action(s):
+        # Allow user to continue guessing for all 6 guesses
+        global N_ROWS
+
+        entered_word = s.lower()
+
+        if entered_word in SPANISH_FIVE_LETTER_WORDS:
+            gw.show_message("¡Esa palabra es válida!")
+        else:
+            gw.show_message("No en la lista de palabras.")
+
+        # processGuess(random_word, entered_word, gw)
+
+        # iterate to the next row
+        N_ROWS -= 1
+
+    gw = WordleGWindow()
+
+    while N_ROWS > 0:
+        gw.add_enter_listener(enter_action(s))
+
+        """
+        # Displays the random word after first guess is made for MILESTONE 1
+
+        random_word_letters = []
+        for letter in random_word:
+            random_word_letters.append(letter)
+        gw.set_square_letter(0, 0, random_word_letters[0])
+        gw.set_square_letter(0, 1, random_word_letters[1])
+        gw.set_square_letter(0, 2, random_word_letters[2])
+        gw.set_square_letter(0, 3, random_word_letters[3])
+        gw.set_square_letter(0, 4, random_word_letters[4])
+
+        # gw.show_message("You have to implement this method.")
+
+        """
+
+
+# this was included right before enter_action in the while loop: lambda s, N_ROWS=N_ROWS, gw=gw: -I'm trying to see if this is the issue
+
+# Startup code
+if __name__ == "__main__":
+    sp_wordle()
+    
