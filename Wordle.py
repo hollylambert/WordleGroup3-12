@@ -136,7 +136,7 @@ def wordle():
                     gw.add_enter_listener(lambda x: None)  # Disable further input
 
         else:
-            gw.show_message({notindicttext})
+            gw.show_message(notindicttext)
 
     # Add the enter_action function as an input listener
     gw.add_enter_listener(enter_action)
