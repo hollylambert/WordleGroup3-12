@@ -8,6 +8,8 @@ from WordleGraphics import (
     WordleGWindow,
     N_ROWS,
     N_COLS,
+    CHOSEN_COLOR,
+    CHOSEN_LANGUAGE,
     CORRECT_COLOR,
     PRESENT_COLOR,
     MISSING_COLOR,
@@ -22,11 +24,11 @@ def wordle():
     gw = WordleGWindow()
     # choose language
     # this is where we need to recieve correct code from toggle, my thoughts are to set a variable in wordleGraphics.py and then send it here similar to as follows
-    # lang = CHOSEN_LANGUAGE
-    # color_scheme = CHOSEN_COLOR
+    lang = CHOSEN_LANGUAGE
+    color_scheme = CHOSEN_COLOR
 
-    lang = input("Choose a language: English, French , Spanish : ").upper()
-    color_scheme - input("Choose a color scheme: Blue or Normal : ").upper()
+    # lang = input("Choose a language: English, French , Spanish : ").upper()
+    # color_scheme - input("Choose a color scheme: Blue or Normal : ").upper()
     # Allow the user to choose a color scheme
     color_scheme = DarkModeButton()
     if lang == "ENGLISH":
