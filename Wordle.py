@@ -31,7 +31,6 @@ def wordle():
     # color_scheme - input("Choose a color scheme: Blue or Normal : ").upper()
 
     # Allow the user to choose a color scheme
-    color_scheme = DarkModeButton()
     if lang == "ENGLISH":
         wordlist = FIVE_LETTER_WORDS
         invalidInput = "Invalid input: Must be 5 letters."

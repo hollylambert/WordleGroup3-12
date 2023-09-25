@@ -22,6 +22,8 @@ BLUE_COLOR = "#355070"
 ROSE_COLOR = "#b56576"
 UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"  # Keys are colored light gray
+CHOSEN_LANGUAGE = "ENGLISH"
+CHOSEN_COLOR = "BLUE"
 
 CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700  # Height of the tkinter canvas (pixels)
