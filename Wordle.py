@@ -55,6 +55,7 @@ def wordle():
         return
 
     randomword = random.choice(wordlist)
+    print(randomword)
     NumGuesses = 6
 
     def enter_action(s):
