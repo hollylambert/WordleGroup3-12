@@ -18,12 +18,12 @@ N_COLS = 5  # Number of columns
 CORRECT_COLOR = "#66BB66"  # Light green for correct letters
 PRESENT_COLOR = "#CCBB66"  # Brownish yellow for misplaced letters
 MISSING_COLOR = "#999999"  # Gray for letters that don't appear
-BLUE_COLOR = "#355070"
-ROSE_COLOR = "#b56576"
+BLUE_COLOR = "#355070"  # color for alternate colors
+ROSE_COLOR = "#b56576"  # color for alternate colors
 UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"  # Keys are colored light gray
-CHOSEN_LANGUAGE = "SPANISH"
-CHOSEN_COLOR = "NORMAL"
+CHOSEN_LANGUAGE = "ENGLISH"
+CHOSEN_COLOR = "BLUE"
 CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700  # Height of the tkinter canvas (pixels)
 
@@ -62,10 +62,74 @@ MESSAGE_X = CANVAS_WIDTH / 2
 MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
 
 
+class DarkModeButton:
+    def __init__(self, root, wordle_window):
+        self.wordle_window = wordle_window
+        self.dark_mode = False  # Initialize dark_mode
+        button = tkinter.Button(
+            root, text="Dark Mode", command=self.toggle_dark_mode_and_color
+        )
+        button.place(x=0, y=0)
+
+    def toggle_dark_mode_and_color(self):
+        chosen_color = self.toggle_dark_mode()
+        # Do something with the chosen_color here
+
+    def toggle_dark_mode(self):
+        self.dark_mode = not self.dark_mode
+        if self.dark_mode:
+            chosen_color = "BLUE"
+        else:
+            chosen_color = "NORMAL"
+        return chosen_color
+
+    class LanguageSelector:
+        def __init__(self, master):
+            self.master = master
+            master.title("Language Selector")
+
+            self.var = tkinter.StringVar()
+            self.var.set("ENGLISH")  # default value
+
+            self.english_radio = tkinter.Radiobutton(
+                master,
+                text="English",
+                variable=self.var,
+                value="ENGLISH",
+                command=self.update_language,
+            )
+            self.english_radio.pack()
+
+            self.french_radio = tkinter.Radiobutton(
+                master,
+                text="French",
+                variable=self.var,
+                value="FRENCH",
+                command=self.update_language,
+            )
+            self.french_radio.pack()
+
+            self.spanish_radio = tkinter.Radiobutton(
+                master,
+                text="Spanish",
+                variable=self.var,
+                value="SPANISH",
+                command=self.update_language,
+            )
+            self.spanish_radio.pack()
+
+    def update_language(self):
+        global CHOSEN_LANGUAGE
+        CHOSEN_LANGUAGE = self.var.get()
+
+
 class WordleGWindow:
     """This class creates the Wordle window."""
 
     def __init__(self):
+        # other initializations
+        self.dark_mode = False
+        self.color_scheme = "normal"  # default to normal
         """Creates the Wordle window."""
 
         def create_grid():
@@ -147,12 +211,31 @@ class WordleGWindow:
         def create_message():
             return WordleMessage(self._canvas, CANVAS_WIDTH / 2, MESSAGE_Y)
 
+        def dark_mode(self):
+            if self.dark_mode_active:
+                CHOSEN_COLOR = "BLUE"
+            else:
+                CHOSEN_COLOR = "NORMAL"
+            for label, key in self._keys.items():
+                self._canvas.itemconfig(key._frame, fill=CHOSEN_COLOR[index % 2])
+                index += 1
+            self.dark_mode_active = not self.dark_mode_active
+
+        def create_button():
+            return DarkModeButton(self._root, dark_mode)
+
         def key_action(tke):
             if isinstance(tke, str):
                 ch = tke.upper()
             else:
                 ch = tke.char.upper()
-            if ch == "\007" or ch == "\177" or ch == "DELETE":
+            if (
+                ch == "\007"
+                or ch == "\177"
+                or ch == "DELETE"
+                or ch == "\x08"
+                or ch == "\x7f"
+            ):
                 self.show_message("")
                 if self._row < N_ROWS and self._col > 0:
                     self._col -= 1
@@ -218,6 +301,7 @@ class WordleGWindow:
         self._message = create_message()
         self._button = create_button()
         self._keys = create_keyboard()
+        self._button = create_button()
         self._enter_listeners = []
         root.bind("<Key>", key_action)
         root.bind("<ButtonPress-1>", press_action)
