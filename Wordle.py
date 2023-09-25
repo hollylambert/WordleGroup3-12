@@ -6,6 +6,7 @@ from WordleDictionary import (
 )
 from WordleGraphics2 import (
     WordleGWindow,
+    WordleGButtons,
     N_ROWS,
     N_COLS,
     CHOSEN_COLOR,
@@ -21,7 +22,7 @@ from WordleGraphics2 import (
 
 def wordle():
     # Create a WordleGWindow for the game graphics
-    gw = WordleGWindow()
+    gw = WordleGButtons()
     # choose language
     # this is where we need to recieve correct code from toggle, my thoughts are to set a variable in wordleGraphics.py and then send it here similar to as follows
     lang = CHOSEN_LANGUAGE

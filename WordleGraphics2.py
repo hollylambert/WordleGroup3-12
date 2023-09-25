@@ -63,36 +63,9 @@ MESSAGE_X = CANVAS_WIDTH / 2
 MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
 
 
-class WordleGWindow:
-    """This class creates the Wordle window."""
-
+class WordleGButtons:
     def __init__(self):
         """Creates the Wordle window."""
-
-        def create_grid():
-            return [
-                [WordleSquare(canvas, i, j) for j in range(N_COLS)]
-                for i in range(N_ROWS)
-            ]
-
-        def create_keyboard():
-            keys = {}
-            nk = len(KEY_LABELS[0])
-            h = KEY_HEIGHT
-            y0 = CANVAS_HEIGHT - BOTTOM_MARGIN - 3 * KEY_HEIGHT - 2 * KEY_YSEP
-            for row in range(len(KEY_LABELS)):
-                y = y0 + row * (KEY_HEIGHT + KEY_YSEP)
-                x = (CANVAS_WIDTH - nk * KEY_WIDTH - (nk - 1) * KEY_XSEP) / 2
-                if row == 1:
-                    x += (KEY_WIDTH + KEY_XSEP) / 2
-                for col in range(len(KEY_LABELS[row])):
-                    label = KEY_LABELS[row][col]
-                    w = KEY_WIDTH
-                    if len(label) > 1:
-                        w += (KEY_WIDTH + KEY_XSEP) / 2
-                    keys[label] = WordleKey(self._canvas, x, y, w, h, label)
-                    x += w + KEY_XSEP
-            return keys
 
         def dark_mode():
             # invert_colors = not invert_colors
@@ -130,6 +103,16 @@ class WordleGWindow:
                 self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
             )
 
+        def dark_mode(self):
+            if self.dark_mode_active:
+                CHOSEN_COLOR = "BLUE"
+            else:
+                CHOSEN_COLOR = "NORMAL"
+            for label, key in self._keys.items():
+                self._canvas.itemconfig(key._frame, fill=CHOSEN_COLOR[index % 2])
+                index += 1
+            self.dark_mode_active = not self.dark_mode_active
+
         def spanish_mode():
             CHOSEN_LANGUAGE = "SPANISH"
             return CHOSEN_LANGUAGE
@@ -145,25 +128,51 @@ class WordleGWindow:
                 SpanishButton(self._root, spanish_mode),
             )
 
+        root = tkinter.Tk()
+        canvas = tkinter.Canvas(
+            root,
+            bg="White",
+            width=CANVAS_WIDTH,
+            height=CANVAS_HEIGHT,
+            highlightthickness=0,
+        )
+        canvas.pack()
+        self._button = create_button()
+
+
+class WordleGWindow:
+    """This class creates the Wordle window."""
+
+    def __init__(self):
+        """Creates the Wordle window."""
+
+        def create_grid():
+            return [
+                [WordleSquare(canvas, i, j) for j in range(N_COLS)]
+                for i in range(N_ROWS)
+            ]
+
+        def create_keyboard():
+            keys = {}
+            nk = len(KEY_LABELS[0])
+            h = KEY_HEIGHT
+            y0 = CANVAS_HEIGHT - BOTTOM_MARGIN - 3 * KEY_HEIGHT - 2 * KEY_YSEP
+            for row in range(len(KEY_LABELS)):
+                y = y0 + row * (KEY_HEIGHT + KEY_YSEP)
+                x = (CANVAS_WIDTH - nk * KEY_WIDTH - (nk - 1) * KEY_XSEP) / 2
+                if row == 1:
+                    x += (KEY_WIDTH + KEY_XSEP) / 2
+                for col in range(len(KEY_LABELS[row])):
+                    label = KEY_LABELS[row][col]
+                    w = KEY_WIDTH
+                    if len(label) > 1:
+                        w += (KEY_WIDTH + KEY_XSEP) / 2
+                    keys[label] = WordleKey(self._canvas, x, y, w, h, label)
+                    x += w + KEY_XSEP
+            return keys
+
         def create_message():
             return WordleMessage(self._canvas, CANVAS_WIDTH / 2, MESSAGE_Y)
-
-        def dark_mode(self):
-            if self.dark_mode_active:
-                CHOSEN_COLOR = "BLUE"
-            else:
-                CHOSEN_COLOR = "NORMAL"
-            for label, key in self._keys.items():
-                self._canvas.itemconfig(key._frame, fill=CHOSEN_COLOR[index % 2])
-                index += 1
-            self.dark_mode_active = not self.dark_mode_active
-
-        def create_button():
-            return (
-                DarkModeButton(self._root, dark_mode),
-                FrenchButton(self._root, french_mode),
-                SpanishButton(self._root, spanish_mode),
-            )
 
         def key_action(tke):
             if isinstance(tke, str):
@@ -235,7 +244,6 @@ class WordleGWindow:
         self._grid = create_grid()
         self._message = create_message()
         self._keys = create_keyboard()
-        self._button = create_button()
         self._enter_listeners = []
         root.bind("<Key>", key_action)
         root.bind("<ButtonPress-1>", press_action)
