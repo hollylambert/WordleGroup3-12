@@ -22,8 +22,8 @@ BLUE_COLOR = "#355070"
 ROSE_COLOR = "#b56576"
 UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"  # Keys are colored light gray
-CHOSEN_LANGUAGE = "ENGLISH"
-CHOSEN_COLOR = "BLUE"
+CHOSEN_LANGUAGE = "SPANISH"
+CHOSEN_COLOR = "NORMAL"
 CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700  # Height of the tkinter canvas (pixels)
 
@@ -92,6 +92,57 @@ class WordleGWindow:
                     keys[label] = WordleKey(self._canvas, x, y, w, h, label)
                     x += w + KEY_XSEP
             return keys
+
+        def dark_mode():
+            # invert_colors = not invert_colors
+            """for i in keys:
+            i.set_dark_mode(True)"""
+            # if invert_colors == True:
+            print(self._canvas.itemconfig(self._keys["Q"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["W"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["E"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["R"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["T"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["Y"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["U"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["I"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["O"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["P"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["A"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["S"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["D"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["F"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["G"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["H"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["J"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["K"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["L"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["Z"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["X"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["C"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["V"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["B"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["N"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["M"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["DELETE"]._frame, fill="Dark Red"))
+            print(
+                self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
+            )
+
+        def spanish_mode():
+            CHOSEN_LANGUAGE = "SPANISH"
+            return CHOSEN_LANGUAGE
+
+        def french_mode():
+            CHOSEN_LANGUAGE = "FRENCH"
+            return CHOSEN_LANGUAGE
+
+        def create_button():
+            return (
+                DarkModeButton(self._root, dark_mode),
+                FrenchButton(self._root, french_mode),
+                SpanishButton(self._root, spanish_mode),
+            )
 
         def create_message():
             return WordleMessage(self._canvas, CANVAS_WIDTH / 2, MESSAGE_Y)
@@ -165,6 +216,7 @@ class WordleGWindow:
         self._canvas = canvas
         self._grid = create_grid()
         self._message = create_message()
+        self._button = create_button()
         self._keys = create_keyboard()
         self._enter_listeners = []
         root.bind("<Key>", key_action)
@@ -207,6 +259,26 @@ class WordleGWindow:
 
     def show_message(self, msg, color="Black"):
         self._message.set_text(msg, color)
+
+
+class DarkModeButton:
+    def __init__(self, root, dark_mode):
+        self.invert_colors = False
+        button = tkinter.Button(root, text="Dark Mode", command=dark_mode)
+        button.place(x=0, y=0)
+
+
+class SpanishButton:
+    def __init__(self, root, spanish_mode):
+        self.invert_colors = False
+        button = tkinter.Button(root, text="Spanish Mode", command=spanish_mode)
+        button.place(x=170, y=0)
+
+
+class FrenchButton:
+    def __init__(self, root, french_mode):
+        button = tkinter.Button(root, text="French Mode", command=french_mode)
+        button.place(x=80, y=0)
 
 
 class WordleSquare:

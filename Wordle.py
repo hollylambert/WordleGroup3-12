@@ -15,7 +15,7 @@ from WordleGraphics import (
     MISSING_COLOR,
     BLUE_COLOR,
     ROSE_COLOR,
-    DarkModeButton,
+    # DarkModeButton,
 )
 
 
@@ -28,7 +28,7 @@ def wordle():
     color_scheme = CHOSEN_COLOR
 
     # lang = input("Choose a language: English, French , Spanish : ").upper()
-    # color_scheme - input("Choose a color scheme: Blue or Normal : ").upper()
+    # color_scheme = input("Choose a color scheme: Blue or Normal : ").upper()
 
     # Allow the user to choose a color scheme
     if lang == "ENGLISH":
