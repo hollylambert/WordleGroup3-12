@@ -15,7 +15,6 @@ from WordleGraphics2 import (
     MISSING_COLOR,
     BLUE_COLOR,
     ROSE_COLOR,
-    # DarkModeButton,
 )
 
 
@@ -128,7 +127,7 @@ def wordle():
                 # Move on to the next row
                 else:
                     gw.set_current_row(gw.get_current_row() + 1)
-                    gw.show_message(incorrecttext + NumGuesses)
+                    gw.show_message(f"{incorrecttext}{NumGuesses}")
 
                 # Check if the player has run out of guesses
                 if NumGuesses == 0:

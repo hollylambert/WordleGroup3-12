@@ -22,7 +22,7 @@ UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
 BLUE_COLOR = "#355070"  # color for alternate colors
 ROSE_COLOR = "#b56576"  # color for alternate colors
 CHOSEN_LANGUAGE = "ENGLISH"  # variable to determine language
-CHOSEN_COLOR = "BLUE"  # variable to determine language
+CHOSEN_COLOR = "NORMAL"  # variable to determine language
 KEY_COLOR = "#DDDDDD"  # Keys are colored light gray
 
 CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
@@ -94,41 +94,41 @@ class WordleGWindow:
                     x += w + KEY_XSEP
             return keys
 
-        def dark_mode():
-            # invert_colors = not invert_colors
-            """for i in keys:
-            i.set_dark_mode(True)"""
-            # if invert_colors == True:
-            print(self._canvas.itemconfig(self._keys["Q"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["W"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["E"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["R"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["T"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["Y"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["U"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["I"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["O"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["P"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["A"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["S"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["D"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["F"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["G"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["H"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["J"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["K"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["L"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["Z"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["X"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["C"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["V"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["B"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["N"]._frame, fill="Dark Grey"))
-            print(self._canvas.itemconfig(self._keys["M"]._frame, fill="white"))
-            print(self._canvas.itemconfig(self._keys["DELETE"]._frame, fill="Dark Red"))
-            print(
-                self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
-            )
+        # def dark_mode():
+        #     # invert_colors = not invert_colors
+        #     """for i in keys:
+        #     i.set_dark_mode(True)"""
+        #     # if invert_colors == True:
+        #     print(self._canvas.itemconfig(self._keys["Q"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["W"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["E"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["R"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["T"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["Y"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["U"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["I"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["O"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["P"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["A"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["S"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["D"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["F"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["G"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["H"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["J"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["K"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["L"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["Z"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["X"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["C"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["V"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["B"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["N"]._frame, fill="Dark Grey"))
+        #     print(self._canvas.itemconfig(self._keys["M"]._frame, fill="white"))
+        #     print(self._canvas.itemconfig(self._keys["DELETE"]._frame, fill="Dark Red"))
+        #     print(
+        #         self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
+        #     )
 
         def spanish_mode():
             CHOSEN_LANGUAGE = "SPANISH"
