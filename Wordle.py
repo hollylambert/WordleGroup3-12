@@ -23,11 +23,11 @@ def wordle():
     gw = WordleGWindow()
     # choose language
     # this is where we need to recieve correct code from toggle, my thoughts are to set a variable in wordleGraphics.py and then send it here similar to as follows
-    lang = CHOSEN_LANGUAGE
-    color_scheme = CHOSEN_COLOR
+    #lang = CHOSEN_LANGUAGE
+    #color_scheme = CHOSEN_COLOR
 
-    # lang = input("Choose a language: English, French , Spanish : ").upper()
-    # color_scheme = input("Choose a color scheme: Blue or Normal : ").upper()
+    lang = input("Choose a language: English, French , Spanish : ").upper()
+    color_scheme = input("Choose a color scheme: Blue or Normal : ").upper()
 
     # Allow the user to choose a color scheme
     if lang == "ENGLISH":
@@ -77,10 +77,12 @@ def wordle():
                 if color_scheme == "BLUE":
                     for col in range(N_COLS):
                         gw.set_square_color(row, col, BLUE_COLOR)
+                        gw.set_key_color(gw.get_square_letter(row,col),BLUE_COLOR)
                     gw.show_message(wintext)
                 else:
                     for col in range(N_COLS):
                         gw.set_square_color(row, col, CORRECT_COLOR)
+                        gw.set_key_color(gw.get_square_letter(row,col),CORRECT_COLOR)
                     gw.show_message(wintext)
                 return
             else:
@@ -106,19 +108,25 @@ def wordle():
                         letter = randomword[col]
                         if col in correct_positions:
                             gw.set_square_color(row, col, BLUE_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),BLUE_COLOR)
                         elif col in present_columns:
                             gw.set_square_color(row, col, ROSE_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),ROSE_COLOR)
                         else:
                             gw.set_square_color(row, col, MISSING_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),MISSING_COLOR)
                 else:
                     for col in range(N_COLS):
                         letter = randomword[col]
                         if col in correct_positions:
                             gw.set_square_color(row, col, CORRECT_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),CORRECT_COLOR)
                         elif col in present_columns:
                             gw.set_square_color(row, col, PRESENT_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),PRESENT_COLOR)
                         else:
                             gw.set_square_color(row, col, MISSING_COLOR)
+                            gw.set_key_color(gw.get_square_letter(row,col),MISSING_COLOR)
 
                 # Check if the player has run out of guesses
                 if NumGuesses == 0:
