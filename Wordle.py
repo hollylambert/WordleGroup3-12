@@ -1,4 +1,3 @@
-
 import random
 from WordleDictionary import (
     FIVE_LETTER_WORDS,
@@ -12,7 +11,7 @@ from WordleGraphics import (
     CORRECT_COLOR,
     PRESENT_COLOR,
     MISSING_COLOR,
-    BLUE_COLOR, 
+    BLUE_COLOR,
     ROSE_COLOR,
     DarkModeButton,
 )
@@ -21,29 +20,45 @@ from WordleGraphics import (
 def wordle():
     # Create a WordleGWindow for the game graphics
     gw = WordleGWindow()
-    #choose language
+    # choose language
     lang = input("Choose a language: English, French , Spanish : ").upper()
-     # Allow the user to choose a color scheme
+    color_scheme - input("Choose a color scheme: Blue or Normal : ").upper()
+    # Allow the user to choose a color scheme
     color_scheme = DarkModeButton()
     if lang == "ENGLISH":
-        wordlist= FIVE_LETTER_WORDS
+        wordlist = FIVE_LETTER_WORDS
+        invalidInput = "Invalid input: Must be 5 letters."
+        wintext = "You win."
+        losetext = "You lose. Correct word was: "
+        incorrecttext = "Incorrect. Try again. Guesses Remaining: "
+        notindicttext = "Invalid input: Word not in dictionary."
     elif lang == "FRENCH":
         wordlist = FRENCH_FIVE_LETTER_WORDS
+        invalidInput = "Saisie invalide: Doit contenir 5 lettres."
+        wintext = "Tu As Gagné."
+        losetext = "Tú pierdes. La palabra correcta era: "
+        incorrecttext = "Incorrect. Essaie encore. Suppositions restantes:"
+        notindicttext = "Entrée non valide: Mot ne figurant pas dans le dictionnaire."
     elif lang == "SPANISH":
         wordlist = SPANISH_FIVE_LETTER_WORDS
+        invalidInput = "Entrada inválida: Debe ser de 5 letras."
+        wintext = "Tú Ganas."
+        losetext = "Tu perds. Le mot correct était: "
+        incorrecttext = "Incorrecto . Inténtalo de nuevo. Conjeturas Restantes:"
+        notindicttext = "Entrada inválida: Palabra no en el diccionario."
     else:
         print("Invalid Language")
         return
-    
+
     randomword = random.choice(wordlist)
     NumGuesses = 6
-    
+
     def enter_action(s):
         nonlocal NumGuesses
         guessedWord = s.strip().lower()
-       # Check if the guessed word has 5 letters
+        # Check if the guessed word has 5 letters
         if len(guessedWord) != 5:
-            gw.show_message("Invalid input: Must be 5 letters.")
+            gw.show_message({invalidInput})
             return
 
         # Check if the guessed word is in the selected word list
@@ -56,11 +71,11 @@ def wordle():
                 if color_scheme == "BLUE":
                     for col in range(N_COLS):
                         gw.set_square_color(row, col, BLUE_COLOR)
-                    gw.show_message("Hooray! You win.")
+                    gw.show_message({wintext})
                 else:
                     for col in range(N_COLS):
                         gw.set_square_color(row, col, CORRECT_COLOR)
-                    gw.show_message("Hooray! You win.")
+                    gw.show_message({wintext})
                 return
             else:
                 # Incorrect guess: determine correct and present positions
@@ -101,23 +116,24 @@ def wordle():
 
                 # Check if the player has run out of guesses
                 if NumGuesses == 0:
-                    gw.show_message(f"You lose. The word was {randomword}.")
+                    gw.show_message(f"{losetext}{randomword}.")
                     gw.add_enter_listener(lambda x: None)  # Disable further input
                 # Move on to the next row
-                else :
+                else:
                     gw.set_current_row(gw.get_current_row() + 1)
-                    gw.show_message(f"Nope. Try again. Guesses left: {NumGuesses}")
+                    gw.show_message(f"{incorrecttext}{NumGuesses}")
 
                 # Check if the player has run out of guesses
                 if NumGuesses == 0:
-                    gw.show_message(f"You lose. The word was {randomword}.")
+                    gw.show_message(f"{losetext}{randomword}.")
                     gw.add_enter_listener(lambda x: None)  # Disable further input
 
         else:
-            gw.show_message("Invalid input: Word not in dictionary.")
+            gw.show_message({notindicttext})
 
     # Add the enter_action function as an input listener
-    gw.add_enter_listener(enter_action) 
-    
+    gw.add_enter_listener(enter_action)
+
+
 if __name__ == "__main__":
     wordle()
