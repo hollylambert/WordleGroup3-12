@@ -4,7 +4,7 @@ from WordleDictionary import (
     FRENCH_FIVE_LETTER_WORDS,
     SPANISH_FIVE_LETTER_WORDS,
 )
-from WordleGraphics import (
+from WordleGraphics2 import (
     WordleGWindow,
     N_ROWS,
     N_COLS,

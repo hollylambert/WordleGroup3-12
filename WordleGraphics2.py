@@ -1,4 +1,4 @@
-# # File: WordleGraphics.py
+# File: WordleGraphics.py
 
 """
 This file implements the WordleGWindow class, which manages the
@@ -18,12 +18,13 @@ N_COLS = 5  # Number of columns
 CORRECT_COLOR = "#66BB66"  # Light green for correct letters
 PRESENT_COLOR = "#CCBB66"  # Brownish yellow for misplaced letters
 MISSING_COLOR = "#999999"  # Gray for letters that don't appear
+UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
 BLUE_COLOR = "#355070"  # color for alternate colors
 ROSE_COLOR = "#b56576"  # color for alternate colors
-UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
+CHOSEN_LANGUAGE = "ENGLISH"  # variable to determine language
+CHOSEN_COLOR = "BLUE"  # variable to determine language
 KEY_COLOR = "#DDDDDD"  # Keys are colored light gray
-CHOSEN_LANGUAGE = "ENGLISH"
-CHOSEN_COLOR = "BLUE"
+
 CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700  # Height of the tkinter canvas (pixels)
 
@@ -66,9 +67,6 @@ class WordleGWindow:
     """This class creates the Wordle window."""
 
     def __init__(self):
-        # other initializations
-        self.dark_mode = False
-        self.color_scheme = "normal"  # default to normal
         """Creates the Wordle window."""
 
         def create_grid():
@@ -161,20 +159,18 @@ class WordleGWindow:
             self.dark_mode_active = not self.dark_mode_active
 
         def create_button():
-            return DarkModeButton(self._root, dark_mode)
+            return (
+                DarkModeButton(self._root, dark_mode),
+                FrenchButton(self._root, french_mode),
+                SpanishButton(self._root, spanish_mode),
+            )
 
         def key_action(tke):
             if isinstance(tke, str):
                 ch = tke.upper()
             else:
                 ch = tke.char.upper()
-            if (
-                ch == "\007"
-                or ch == "\177"
-                or ch == "DELETE"
-                or ch == "\x08"
-                or ch == "\x7f"
-            ):
+            if ch == "\007" or ch == "\177" or ch == "DELETE":
                 self.show_message("")
                 if self._row < N_ROWS and self._col > 0:
                     self._col -= 1
@@ -238,7 +234,6 @@ class WordleGWindow:
         self._canvas = canvas
         self._grid = create_grid()
         self._message = create_message()
-        self._button = create_button()
         self._keys = create_keyboard()
         self._button = create_button()
         self._enter_listeners = []
