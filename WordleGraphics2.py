@@ -130,13 +130,15 @@ class WordleGWindow:
         #         self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
         #     )
 
-        def spanish_mode():
+        def spanish_mode(self):
             CHOSEN_LANGUAGE = "SPANISH"
             return CHOSEN_LANGUAGE
+            self.root.update() 
 
         def french_mode():
             CHOSEN_LANGUAGE = "FRENCH"
             return CHOSEN_LANGUAGE
+            self.root.update() 
 
         def create_button():
             return (
@@ -157,6 +159,7 @@ class WordleGWindow:
                 self._canvas.itemconfig(key._frame, fill=CHOSEN_COLOR[index % 2])
                 index += 1
             self.dark_mode_active = not self.dark_mode_active
+            self.root.update() 
 
         def create_button():
             return (
@@ -282,21 +285,36 @@ class WordleGWindow:
 class DarkModeButton:
     def __init__(self, root, dark_mode):
         self.invert_colors = False
-        button = tkinter.Button(root, text="Dark Mode", command=dark_mode)
+        self.root = root
+        button = tkinter.Button(root, text="Dark Mode", command=self.dark_mode)
         button.place(x=0, y=0)
+
+    def dark_mode(self):
+        # your code for dark mode
+        self.root.update()  # Update the window after making changes
+
 
 
 class SpanishButton:
     def __init__(self, root, spanish_mode):
-        self.invert_colors = False
-        button = tkinter.Button(root, text="Spanish Mode", command=spanish_mode)
+        self.root = root
+        button = tkinter.Button(root, text="Spanish Mode", command=self.spanish_mode)
         button.place(x=170, y=0)
 
+    def spanish_mode(self):
+        # your code for Spanish mode
+        self.root.update()
 
 class FrenchButton:
     def __init__(self, root, french_mode):
-        button = tkinter.Button(root, text="French Mode", command=french_mode)
+        self.root = root
+        button = tkinter.Button(root, text="French Mode", command=self.french_mode)
         button.place(x=80, y=0)
+
+    def french_mode(self):
+        # your code for French mode
+        self.root.update()
+
 
 
 class WordleSquare:
