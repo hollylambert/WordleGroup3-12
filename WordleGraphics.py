@@ -71,14 +71,13 @@ class DarkModeButton:
         )  # Call the modified method
         button.place(x=0, y=0)
 
-    def toggle_dark_mode_and_color(
-        self,
-    ):  # This method toggles the dark mode and sets the color scheme to "BLUE"
-        self.wordle_window.toggle_dark_mode()
-        if self.wordle_window.dark_mode:
-            self.wordle_window.set_color_scheme(
-                "BLUE"
-            )  # Set the color scheme to "BLUE" when dark mode is activated
+    def toggle_dark_mode(self):
+        self.dark_mode = not self.dark_mode
+        if self.dark_mode:  # This line checks if self.dark_mode is True
+            CHOSEN_COLOR = "BLUE"
+        else:
+            CHOSEN_COLOR = "NORMAL"
+        return CHOSEN_COLOR
 
 
 class WordleGWindow:
@@ -89,30 +88,6 @@ class WordleGWindow:
         self.dark_mode = False
         self.color_scheme = "normal"  # default to normal
         """Creates the Wordle window."""
-
-    def toggle_dark_mode(self):
-        self.dark_mode = not self.dark_mode
-        self.apply_colors()
-
-    def set_color_scheme(self, color_scheme):
-        self.color_scheme = color_scheme
-        self.apply_colors()
-
-    def apply_colors(self):
-        if self.dark_mode:
-            # Set dark mode colors
-            self.background_color = "black"
-            self.text_color = "white"
-        else:
-            # Set light mode colors
-            self.background_color = "white"
-            self.text_color = "black"
-
-        # Update the color scheme
-        if self.color_scheme == "BLUE":
-            self.correct_color = "#355070"  # blue color
-        else:
-            self.correct_color = CORRECT_COLOR  # default correct color
 
         def create_grid():
             return [
