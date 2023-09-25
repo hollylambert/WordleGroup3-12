@@ -2,7 +2,11 @@
 Starter file
 """
 import random
-from WordleDictionary import FIVE_LETTER_WORDS, FRENCH_FIVE_LETTER_WORDS, SPANISH_FIVE_LETTER_WORDS
+from WordleDictionary import (
+    FIVE_LETTER_WORDS,
+    FRENCH_FIVE_LETTER_WORDS,
+    SPANISH_FIVE_LETTER_WORDS,
+)
 from WordleGraphics import (
     WordleGWindow,
     N_ROWS,
@@ -10,6 +14,7 @@ from WordleGraphics import (
     CORRECT_COLOR,
     PRESENT_COLOR,
     MISSING_COLOR,
+    DarkModeButton,
 )
 
 
@@ -17,6 +22,11 @@ from WordleGraphics import (
 def processGuess(random_word, entered_word, gw):
     position = 0
     cell = ""
+    if DarkModeButton.invert_colors == True:
+        CORRECT_COLOR = "#1AFF1A"  # Light green for correct letters
+        PRESENT_COLOR = "#994F00"  # Brownish yellow for misplaced letters
+        MISSING_COLOR = "#999999"  # Gray for letters that don't appear
+
     for letter in entered_word:
         if letter == random_word[position]:
             cell = gw.set_square_color(gw.get_current_row, position, CORRECT_COLOR)
@@ -83,6 +93,7 @@ def en_wordle():
 if __name__ == "__main__":
     en_wordle()
 
+
 def fr_wordle():
     # Generates a random index to choose a word from the FIVE_LETTER_WORDS array
     index = random.randint(0, len(FRENCH_FIVE_LETTER_WORDS) - 1)
@@ -134,6 +145,7 @@ def fr_wordle():
 if __name__ == "__main__":
     fr_wordle()
 
+
 def sp_wordle():
     # Generates a random index to choose a word from the FIVE_LETTER_WORDS array
     index = random.randint(0, len(SPANISH_FIVE_LETTER_WORDS) - 1)
@@ -184,4 +196,3 @@ def sp_wordle():
 # Startup code
 if __name__ == "__main__":
     sp_wordle()
-    

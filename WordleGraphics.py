@@ -12,23 +12,23 @@ import tkinter
 
 # Constants
 
-N_ROWS = 6			# Number of rows
-N_COLS = 5			# Number of columns
+N_ROWS = 6  # Number of rows
+N_COLS = 5  # Number of columns
 
-CORRECT_COLOR = "#66BB66"       # Light green for correct letters
-PRESENT_COLOR = "#CCBB66"       # Brownish yellow for misplaced letters
-MISSING_COLOR = "#999999"       # Gray for letters that don't appear
-UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
-KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
+CORRECT_COLOR = "#66BB66"  # Light green for correct letters
+PRESENT_COLOR = "#CCBB66"  # Brownish yellow for misplaced letters
+MISSING_COLOR = "#999999"  # Gray for letters that don't appear
+UNKNOWN_COLOR = "#FFFFFF"  # Undetermined letters are white
+KEY_COLOR = "#999999"  # Keys are colored light gray
 
-CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
-CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
+CANVAS_WIDTH = 500  # Width of the tkinter canvas (pixels)
+CANVAS_HEIGHT = 700  # Height of the tkinter canvas (pixels)
 
-SQUARE_SIZE = 60		# Size of each square (pixels)
-SQUARE_SEP = 5                  # Separation between squares (pixels)
-TOP_MARGIN = 30    		# Top margin (pixels)
-BOTTOM_MARGIN = 30    		# Bottom margin (pixels)
-MESSAGE_SEP = 20                # Space between board and message center
+SQUARE_SIZE = 60  # Size of each square (pixels)
+SQUARE_SEP = 5  # Separation between squares (pixels)
+TOP_MARGIN = 30  # Top margin (pixels)
+BOTTOM_MARGIN = 30  # Bottom margin (pixels)
+MESSAGE_SEP = 20  # Space between board and message center
 
 SQUARE_FONT = ("Helvetica Neue", -44, "bold")
 MESSAGE_FONT = ("Helvetica Neue", -20, "bold")
@@ -42,9 +42,9 @@ KEY_XSEP = 5
 KEY_YSEP = 7
 
 KEY_LABELS = [
-    [ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" ],
-    [ "A", "S", "D", "F", "G", "H", "J", "K", "L" ],
-    [ "ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE" ]
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"],
 ]
 
 CLICK_MAX_DISTANCE = 2
@@ -58,6 +58,7 @@ BOARD_HEIGHT = N_ROWS * SQUARE_SIZE + (N_ROWS - 1) * SQUARE_SEP
 MESSAGE_X = CANVAS_WIDTH / 2
 MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
 
+
 class WordleGWindow:
     """This class creates the Wordle window."""
 
@@ -66,13 +67,12 @@ class WordleGWindow:
 
         def create_grid():
             return [
-                [
-                    WordleSquare(canvas, i, j) for j in range(N_COLS)
-                ] for i in range(N_ROWS)
+                [WordleSquare(canvas, i, j) for j in range(N_COLS)]
+                for i in range(N_ROWS)
             ]
 
         def create_keyboard():
-            keys = { }
+            keys = {}
             nk = len(KEY_LABELS[0])
             h = KEY_HEIGHT
             y0 = CANVAS_HEIGHT - BOTTOM_MARGIN - 3 * KEY_HEIGHT - 2 * KEY_YSEP
@@ -91,9 +91,46 @@ class WordleGWindow:
             return keys
 
         def create_message():
-            return WordleMessage(self._canvas,
-                                 CANVAS_WIDTH / 2,
-                                 MESSAGE_Y)
+            return WordleMessage(self._canvas, CANVAS_WIDTH / 2, MESSAGE_Y)
+
+        def dark_mode():
+            # invert_colors = not invert_colors
+            """for i in keys:
+            i.set_dark_mode(True)"""
+            # if invert_colors == True:
+            print(self._canvas.itemconfig(self._keys["Q"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["W"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["E"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["R"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["T"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["Y"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["U"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["I"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["O"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["P"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["A"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["S"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["D"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["F"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["G"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["H"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["J"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["K"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["L"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["Z"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["X"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["C"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["V"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["B"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["N"]._frame, fill="Dark Grey"))
+            print(self._canvas.itemconfig(self._keys["M"]._frame, fill="white"))
+            print(self._canvas.itemconfig(self._keys["DELETE"]._frame, fill="Dark Red"))
+            print(
+                self._canvas.itemconfig(self._keys["ENTER"]._frame, fill="Dark Green")
+            )
+
+        def create_button():
+            return DarkModeButton(self._root, dark_mode)
 
         def key_action(tke):
             if isinstance(tke, str):
@@ -110,7 +147,7 @@ class WordleGWindow:
                 self.show_message("")
                 s = ""
                 for col in range(N_COLS):
-                    s += self._grid[self._row][col].get_letter();
+                    s += self._grid[self._row][col].get_letter()
                 for fn in self._enter_listeners:
                     fn(s)
             elif ch.isalpha():
@@ -153,17 +190,21 @@ class WordleGWindow:
         root.title("Wordle")
         root.protocol("WM_DELETE_WINDOW", delete_window)
         self._root = root
-        canvas = tkinter.Canvas(root,
-                                bg="White",
-                                width=CANVAS_WIDTH,
-                                height=CANVAS_HEIGHT,
-                                highlightthickness=0)
+        canvas = tkinter.Canvas(
+            root,
+            bg="White",
+            width=CANVAS_WIDTH,
+            height=CANVAS_HEIGHT,
+            highlightthickness=0,
+        )
         canvas.pack()
         self._canvas = canvas
+        self._button = create_button()
+        # self._dark_mode = dark_mode()
         self._grid = create_grid()
         self._message = create_message()
         self._keys = create_keyboard()
-        self._enter_listeners = [ ]
+        self._enter_listeners = []
         root.bind("<Key>", key_action)
         root.bind("<ButtonPress-1>", press_action)
         root.bind("<ButtonRelease-1>", release_action)
@@ -206,8 +247,14 @@ class WordleGWindow:
         self._message.set_text(msg, color)
 
 
-class WordleSquare:
+class DarkModeButton:
+    def __init__(self, root, dark_mode):
+        self.invert_colors = False
+        button = tkinter.Button(root, text="Dark Mode", command=dark_mode)
+        button.place(x=0, y=0)
 
+
+class WordleSquare:
     def __init__(self, canvas, row, col):
         x0 = (CANVAS_WIDTH - BOARD_WIDTH) / 2 + col * SQUARE_DELTA
         y0 = TOP_MARGIN + row * SQUARE_DELTA
@@ -215,12 +262,11 @@ class WordleSquare:
         y1 = y0 + SQUARE_SIZE
         self._canvas = canvas
         self._ch = " "
-        self._color = UNKNOWN_COLOR;
+        self._color = UNKNOWN_COLOR
         self._frame = canvas.create_rectangle(x0, y0, x1, y1)
-        self._text = canvas.create_text(x0 + SQUARE_SIZE / 2,
-                                        y0 + SQUARE_SIZE / 2,
-                                        text=self._ch,
-                                        font=SQUARE_FONT)
+        self._text = canvas.create_text(
+            x0 + SQUARE_SIZE / 2, y0 + SQUARE_SIZE / 2, text=self._ch, font=SQUARE_FONT
+        )
 
     def get_letter(self):
         return self._ch
@@ -243,45 +289,64 @@ class WordleSquare:
 
 
 class WordleKey:
-
     def __init__(self, canvas, x, y, width, height, label):
         self._canvas = canvas
         self._label = label
-        self._bounds = [ x, y, width, height ]
+        self._bounds = [x, y, width, height]
         self._color = UNKNOWN_COLOR
         font = KEY_FONT
         if label == "ENTER":
             font = ENTER_FONT
         if label == "DELETE":
             label = "\u232B"
-        points = [ x + KEY_CORNER, y,
-                   x + KEY_CORNER, y,
-                   x + width - KEY_CORNER, y,
-                   x + width - KEY_CORNER, y,
-                   x + width, y,
-                   x + width, y + KEY_CORNER,
-                   x + width, y + KEY_CORNER,
-                   x + width, y + height - KEY_CORNER,
-                   x + width, y + height - KEY_CORNER,
-                   x + width, y + height,
-                   x + width - KEY_CORNER, y + height,
-                   x + width - KEY_CORNER, y + height,
-                   x + KEY_CORNER, y + height,
-                   x + KEY_CORNER, y + height,
-                   x, y + height,
-                   x, y + height - KEY_CORNER,
-                   x, y + height - KEY_CORNER,
-                   x, y + KEY_CORNER,
-                   x, y + KEY_CORNER,
-                   x, y]
-        self._frame = canvas.create_polygon(points,
-                                            fill=KEY_COLOR,
-                                            outline=KEY_COLOR,
-                                            smooth=True)
-        self._text = canvas.create_text(x + width / 2,
-                                        y + height / 2,
-                                        text=label,
-                                        font=font)
+        points = [
+            x + KEY_CORNER,
+            y,
+            x + KEY_CORNER,
+            y,
+            x + width - KEY_CORNER,
+            y,
+            x + width - KEY_CORNER,
+            y,
+            x + width,
+            y,
+            x + width,
+            y + KEY_CORNER,
+            x + width,
+            y + KEY_CORNER,
+            x + width,
+            y + height - KEY_CORNER,
+            x + width,
+            y + height - KEY_CORNER,
+            x + width,
+            y + height,
+            x + width - KEY_CORNER,
+            y + height,
+            x + width - KEY_CORNER,
+            y + height,
+            x + KEY_CORNER,
+            y + height,
+            x + KEY_CORNER,
+            y + height,
+            x,
+            y + height,
+            x,
+            y + height - KEY_CORNER,
+            x,
+            y + height - KEY_CORNER,
+            x,
+            y + KEY_CORNER,
+            x,
+            y + KEY_CORNER,
+            x,
+            y,
+        ]
+        self._frame = canvas.create_polygon(
+            points, fill=KEY_COLOR, outline=KEY_COLOR, smooth=True
+        )
+        self._text = canvas.create_text(
+            x + width / 2, y + height / 2, text=label, font=font
+        )
 
     def get_color(self):
         return self._color
@@ -296,14 +361,12 @@ class WordleKey:
 
 
 class WordleMessage:
-
     def __init__(self, canvas, x, y):
         self._canvas = canvas
         self._text = ""
-        self._msg = canvas.create_text(x, y,
-                                       text="",
-                                       font=MESSAGE_FONT,
-                                       anchor=tkinter.CENTER)
+        self._msg = canvas.create_text(
+            x, y, text="", font=MESSAGE_FONT, anchor=tkinter.CENTER
+        )
 
     def get_text(self):
         return self._text
