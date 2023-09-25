@@ -42,14 +42,14 @@ def wordle():
         invalidInput = "Saisie invalide: Doit contenir 5 lettres."
         wintext = "Tu As Gagné."
         losetext = "Tú pierdes. La palabra correcta era: "
-        incorrecttext = "Incorrect. Essaie encore. Suppositions restantes:"
+        incorrecttext = "Essaie encore. Suppositions restantes:"
         notindicttext = "Entrée non valide: Mot ne figurant pas dans le dictionnaire."
     elif lang == "SPANISH":
         wordlist = SPANISH_FIVE_LETTER_WORDS
         invalidInput = "Entrada inválida: Debe ser de 5 letras."
         wintext = "Tú Ganas."
         losetext = "Tu perds. Le mot correct était: "
-        incorrecttext = "Incorrecto . Inténtalo de nuevo. Conjeturas Restantes:"
+        incorrecttext = "Inténtalo de nuevo. Conjeturas Restantes:"
         notindicttext = "Entrada inválida: Palabra no en el diccionario."
     else:
         print("Invalid Language")
